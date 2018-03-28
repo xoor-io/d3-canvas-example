@@ -72,7 +72,6 @@ function drawPoint(point) {
     const px = x(point[0]);
     const py = y(point[1]);
 
-    // context.moveTo(px + 2.5, py);
     context.arc(px, py, 1.2, 0, 2 * Math.PI,true);
     context.fill();
 }
