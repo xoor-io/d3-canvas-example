@@ -7,3 +7,9 @@
 .svg-plot, .canvas-plot {
     position: absolute;
 }
+
+.tools {
+    position: absolute;
+    left: calc(50% + 400px);
+    visibility: hidden;
+}

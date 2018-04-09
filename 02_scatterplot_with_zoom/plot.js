@@ -32,6 +32,19 @@ const canvasChart = container.append('canvas')
     .style('margin-top', margin.top + 'px')
     .attr('class', 'canvas-plot');
 
+//Prepare buttons
+const toolsList = container.select('.tools')
+    .style('margin-top', margin.top + 'px')
+    .style('visibility', 'visible');
+
+toolsList.select('#reset').on('click', () => {
+    const t = d3.zoomIdentity.translate(0, 0).scale(1);
+    canvasChart.transition()
+      .duration(200)
+      .ease(d3.easeLinear)
+      .call(zoom_function.transform, t)
+});
+
 const context = canvasChart.node().getContext('2d');
 
 // Init Scales
@@ -62,16 +75,40 @@ svgChart.append('text')
     .text('Axis X');
 
 // Draw on canvas
-dataExample.forEach( point => {
-    drawPoint(point);
-});
+function draw(transform) {
+    const scaleX = transform.rescaleX(x);
+    const scaleY = transform.rescaleY(y);
 
-function drawPoint(point) {
+    gxAxis.call(xAxis.scale(scaleX));
+    gyAxis.call(yAxis.scale(scaleY));
+
+    context.clearRect(0, 0, width, height);
+
+    dataExample.forEach( point => {
+        drawPoint(scaleX, scaleY, point, transform.k);
+    });
+}
+
+// First draw
+draw(d3.zoomIdentity)
+
+function drawPoint(scaleX, scaleY, point, scale) {
     context.beginPath();
     context.fillStyle = pointColor;
-    const px = x(point[0]);
-    const py = y(point[1]);
+    const px = scaleX(point[0]);
+    const py = scaleY(point[1]);
 
-    context.arc(px, py, 1.2, 0, 2 * Math.PI,true);
+    context.arc(px, py, 1.2 * scale, 0, 2 * Math.PI, true);
     context.fill();
 }
+
+// Zoom/Drag function
+const zoom_function = d3.zoom().scaleExtent([1, 1000])
+    .on('zoom', () => {
+        const transform = d3.event.transform;
+        context.save();
+        draw(transform);
+        context.restore();
+    });
+
+canvasChart.call(zoom_function);
