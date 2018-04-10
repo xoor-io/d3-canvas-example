@@ -98,7 +98,7 @@ function drawPoint(scaleX, scaleY, point, k) {
     const px = scaleX(point[0]);
     const py = scaleY(point[1]);
 
-    context.arc(px, py, 1.2 * scale, 0, 2 * Math.PI, true);
+    context.arc(px, py, 1.2 * k, 0, 2 * Math.PI, true);
     context.fill();
 }
 
