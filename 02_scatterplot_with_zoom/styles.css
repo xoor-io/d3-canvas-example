@@ -1,0 +1,15 @@
+.scatter-container {
+    margin: auto;
+    width: 800px;
+    height: 600px;
+}
+
+.svg-plot, .canvas-plot {
+    position: absolute;
+}
+
+.tools {
+    position: absolute;
+    left: calc(50% + 400px);
+    visibility: hidden;
+}
