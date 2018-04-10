@@ -92,7 +92,7 @@ function draw(transform) {
 // Initial draw made with no zoom
 draw(d3.zoomIdentity)
 
-function drawPoint(scaleX, scaleY, point, scale) {
+function drawPoint(scaleX, scaleY, point, k) {
     context.beginPath();
     context.fillStyle = pointColor;
     const px = scaleX(point[0]);
