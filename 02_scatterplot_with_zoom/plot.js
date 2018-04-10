@@ -32,7 +32,7 @@ const canvasChart = container.append('canvas')
     .style('margin-top', margin.top + 'px')
     .attr('class', 'canvas-plot');
 
-//Prepare buttons
+// Prepare buttons
 const toolsList = container.select('.tools')
     .style('margin-top', margin.top + 'px')
     .style('visibility', 'visible');
@@ -74,7 +74,7 @@ svgChart.append('text')
     .attr('y', `${height + 40}`)
     .text('Axis X');
 
-// Draw on canvas
+// Draw plot on canvas
 function draw(transform) {
     const scaleX = transform.rescaleX(x);
     const scaleY = transform.rescaleY(y);
@@ -89,7 +89,7 @@ function draw(transform) {
     });
 }
 
-// First draw
+// Initial draw made with no zoom
 draw(d3.zoomIdentity)
 
 function drawPoint(scaleX, scaleY, point, scale) {
@@ -102,7 +102,7 @@ function drawPoint(scaleX, scaleY, point, scale) {
     context.fill();
 }
 
-// Zoom/Drag function
+// Zoom/Drag handler
 const zoom_function = d3.zoom().scaleExtent([1, 1000])
     .on('zoom', () => {
         const transform = d3.event.transform;
