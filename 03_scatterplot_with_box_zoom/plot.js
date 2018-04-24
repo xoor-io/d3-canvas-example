@@ -118,7 +118,21 @@ const zoom_function = d3.zoom().scaleExtent([1, 1000])
 canvasChart.call(zoom_function);
 
 //Box Zoom
-d3.select('svg').style('z-index', 1);
+
+const svgChartParent = d3.select('svg');
+const zoomButton = toolsList.select('#zoom').on('click', () => {
+    d3.selectAll('.active').classed('active', false);
+    zoomButton.classed('active', true);
+    canvasChart.style('z-index', 1);
+    svgChartParent.style('z-index', 0);
+});
+
+const brushButton = toolsList.select('#brush').on('click', () => {
+    d3.selectAll('.active').classed('active', false);
+    brushButton.classed('active', true);
+    canvasChart.style('z-index', 0);
+    svgChartParent.style('z-index', 1);
+});
 
 const brush = d3.brush().extent([[0, 0], [width, height]])
     .on("start", () => { brush_startEvent(); })
