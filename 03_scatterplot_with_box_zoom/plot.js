@@ -121,14 +121,14 @@ canvasChart.call(zoom_function);
 
 const svgChartParent = d3.select('svg');
 const zoomButton = toolsList.select('#zoom').on('click', () => {
-    d3.selectAll('.active').classed('active', false);
+    toolsList.selectAll('.active').classed('active', false);
     zoomButton.classed('active', true);
     canvasChart.style('z-index', 1);
     svgChartParent.style('z-index', 0);
 });
 
 const brushButton = toolsList.select('#brush').on('click', () => {
-    d3.selectAll('.active').classed('active', false);
+    toolsList.selectAll('.active').classed('active', false);
     brushButton.classed('active', true);
     canvasChart.style('z-index', 0);
     svgChartParent.style('z-index', 1);
@@ -145,9 +145,7 @@ const brush = d3.brush().extent([[0, 0], [width, height]])
 const brushSvg = svgChart
     .append("g")
     .attr("class", "brush")
-    .call(brush)
-    .on("keydown.brush", null)
-    .on("keyup.brush", null);
+    .call(brush);
 
 let brushStartPoint = null;
 
