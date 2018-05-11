@@ -251,7 +251,8 @@ function brush_endEvent() {
         zy = t.rescaleY(y);
         // Call zoomFunction with a new transformation from the new scale and brush position.
         // To calculate the brush position we use the originalPoint in the new Axis Scale.
-        // originalPoint was obtained from inverse so we need to mul by -1
+        // originalPoint it's always positive (because we're sure it's within the canvas).
+        // We need to translate this originalPoint to [0,0]. So, we do (0 - position) or (position * -1)
         canvasChart
             .transition()
             .duration(200)
