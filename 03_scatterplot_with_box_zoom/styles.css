@@ -1,0 +1,30 @@
+.scatter-container {
+    margin: auto;
+    width: 800px;
+    height: 600px;
+}
+
+.svg-plot, .canvas-plot {
+    position: absolute;
+}
+
+.tools {
+    position: absolute;
+    left: calc(50% + 400px);
+    visibility: hidden;
+}
+
+.tools button {
+    background-color: #e7e7e7;
+    border: none;
+    color: #000000;
+    cursor: pointer;
+    display: block;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    outline: 0;
+}
+
+.tools button.active { 
+    background-color: #13a613;
+}
